@@ -19,9 +19,6 @@ import java.util.Map;
  */
 public class MyWebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
-
-
-
     /**
      * 建立连接
      *
@@ -30,7 +27,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<TextWebSocke
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("与客户端建立连接，通道开启");
+        System.out.println("与客户端建立连接，通道开启=" + ctx.channel().id());
         MyChannelHandlerPool.group.add(ctx.channel());
     }
 
@@ -42,7 +39,7 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<TextWebSocke
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("与客户端断开连接，通道关闭");
+        System.out.println("与客户端断开连接，通道关闭=" + ctx.channel().id());
         MyChannelHandlerPool.group.remove(ctx.channel());
     }
 

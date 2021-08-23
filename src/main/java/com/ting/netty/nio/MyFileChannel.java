@@ -40,7 +40,36 @@ public class MyFileChannel {
 
             ByteBuffer buffer = ByteBuffer.allocate((int) file.length());
             channel.read(buffer);
+
             System.out.println(new String(buffer.array()));
         }
+
+        // 使用一个buffer进行操作
+
+        try (FileInputStream inputStream = new FileInputStream("D:\\ting.txt");
+             FileOutputStream outputStream = new FileOutputStream("D:\\ting1.txt")) {
+
+            // 读文件
+            FileChannel channel = inputStream.getChannel();
+            ByteBuffer buffer = ByteBuffer.allocate(str.length());
+
+            while (true) {
+                // 重置数据，防止上次的操作影响到本次的执行
+                buffer.clear();
+
+                int read = channel.read(buffer);
+                if (read == -1) {
+                    break;
+                }
+            }
+
+            // 读--》写
+            buffer.flip();
+
+            // 写入文件
+            FileChannel outputStreamChannel = outputStream.getChannel();
+            outputStreamChannel.write(buffer);
+        }
+        
     }
 }

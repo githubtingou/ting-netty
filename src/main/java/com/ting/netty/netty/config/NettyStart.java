@@ -6,6 +6,9 @@ import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * netty当spring boot启动后启动
  *
@@ -31,5 +34,16 @@ public class NettyStart implements ApplicationListener<ApplicationStartedEvent> 
         }
         log.info("netty启动成功,端口号[{}]", nettyPort);
 
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<Integer>() {{
+            add(1);
+            add(1);
+            add(1);
+            add(1);
+            add(1);
+        }};
+        list.stream().parallel().forEach(System.out::println);
     }
 }
